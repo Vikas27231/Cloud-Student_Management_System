@@ -19,8 +19,8 @@ RUN ls -la /app/
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
-# Expose port 8000 for the application
+# Expose port 80 for the application
 EXPOSE 80
 
 # Start the application with Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:80", "student_management.wsgi:application"]
+CMD ["gunicorn", "--workers=4", "--timeout=180", "--bind=0.0.0.0:80", "student_management.wsgi:application"]
