@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v3  # ✅ Corrected step
+      uses: actions/checkout@v3  # ✅ Fix: Correct action to checkout code
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
@@ -72,7 +72,7 @@ jobs:
         }' > Dockerrun.aws.json
 
     - name: Upload Artifact for Deployment
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3  # ✅ Fix: Correct placement of this step
       with:
         name: dockerrun-json
         path: Dockerrun.aws.json
@@ -88,4 +88,3 @@ jobs:
         region: ${{ secrets.AWS_REGION }}
         version_label: "deploy-${{ env.IMAGE_TAG }}"
         deployment_package: Dockerrun.aws.json
-
