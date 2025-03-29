@@ -3,7 +3,7 @@ name: Deploy to AWS Elastic Beanstalk
 on:
   push:
     branches:
-      - none
+      - main
 
 jobs:
   deploy:
@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v4  # ✅ Fix: Correct action to checkout code
+      uses: actions/checkout@v4
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
@@ -38,41 +38,11 @@ jobs:
               "HostPort": 80
             }
           ],
-          "Logging": "/var/log/nginx",
-          "Environment": [
-            {
-              "Name": "AWS_ACCESS_KEY_ID",
-              "Value": "${{ secrets.AWS_ACCESS_KEY_ID }}"
-            },
-            {
-              "Name": "AWS_SECRET_ACCESS_KEY",
-              "Value": "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
-            },
-            {
-              "Name": "AWS_SESSION_TOKEN",
-              "Value": "${{ secrets.AWS_SESSION_TOKEN }}"
-            },
-            {
-              "Name": "AWS_REGION",
-              "Value": "${{ secrets.AWS_REGION }}"
-            },
-            {
-              "Name": "AWS_S3_BUCKET_NAME",
-              "Value": "${{ secrets.AWS_S3_BUCKET_NAME }}"
-            },
-            {
-              "Name": "AWS_DYNAMODB_TABLE",
-              "Value": "${{ secrets.AWS_DYNAMODB_TABLE }}"
-            },
-            {
-              "Name": "AWS_SNS_TOPIC_ARN",
-              "Value": "${{ secrets.AWS_SNS_TOPIC_ARN }}"
-            }
-          ]
+          "Logging": "/var/log/nginx"
         }' > Dockerrun.aws.json
 
     - name: Upload Artifact for Deployment
-      uses: actions/upload-artifact@v4  # ✅ Fix: Correct placement of this step
+      uses: actions/upload-artifact@v4
       with:
         name: dockerrun-json
         path: Dockerrun.aws.json
