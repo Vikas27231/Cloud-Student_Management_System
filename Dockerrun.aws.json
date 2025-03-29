@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "vikas277/stu-5:latest",
+    "Name": "vikas277/stu-7:latest",
     "Update": "true"
   },
   "Ports": [
