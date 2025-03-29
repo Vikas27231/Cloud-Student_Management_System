@@ -1,14 +1,44 @@
 {
-    "AWSEBDockerrunVersion": "1",
-    "Image": {
-      "Name": "vikas277/stu-3:latest",
-      "Update": "true"
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "vikas277/stu-3:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 8000,
+      "HostPort": 80
+    }
+  ],
+  "Logging": "/var/log/nginx",
+  "Environment": [
+    {
+      "Name": "AWS_ACCESS_KEY_ID",
+      "Value": "__AWS_ACCESS_KEY_ID__"
     },
-    "Ports": [
-      {
-        "ContainerPort": 8000,
-        "HostPort": 80
-      }
-    ],
-    "Logging": "/var/log/nginx"
-  }
+    {
+      "Name": "AWS_SECRET_ACCESS_KEY",
+      "Value": "__AWS_SECRET_ACCESS_KEY__"
+    },
+    {
+      "Name": "AWS_SESSION_TOKEN",
+      "Value": "__AWS_SESSION_TOKEN__"
+    },
+    {
+      "Name": "AWS_REGION",
+      "Value": "__AWS_REGION__"
+    },
+    {
+      "Name": "AWS_S3_BUCKET_NAME",
+      "Value": "__AWS_S3_BUCKET_NAME__"
+    },
+    {
+      "Name": "AWS_DYNAMODB_TABLE",
+      "Value": "__AWS_DYNAMODB_TABLE__"
+    },
+    {
+      "Name": "AWS_SNS_TOPIC_ARN",
+      "Value": "__AWS_SNS_TOPIC_ARN__"
+    }
+  ]
+}
